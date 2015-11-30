@@ -1,0 +1,40 @@
+<% action_url = @cat.persisted? ? cat_url(@cat) : cats_url %>
+<% form_method = @cat.persisted? ? "PATCH" : "POST" %>
+<% submit_text = @cat.persisted? ? "Update #{@cat.name}" : "Create Cat!" %>
+
+<form action="<%= action_url %>" method="POST">
+  <input type="hidden" name="_method" value="<%= form_method %>">
+
+  <label for="cat_name">Cat name</label>
+  <input type="text" name="cat[name]" id="cat_name" value= "<%= @cat.name %>">
+  <br>
+
+  <label for="cat_sex_male">Male</label>
+  <input type="radio" name="cat[sex]" id="cat_sex_male" value="M">
+  <br>
+
+  <label for="cat_sex_female">Female</label>
+  <input type="radio" name="cat[sex]" id="cat_sex_female" value="F">
+  <br>
+
+  <label for="cat_color">Cat's coat color</label>
+  <select name="cat[color]" id="cat_color">
+    <option value="black">Black</option>
+    <option value="white">White</option>
+    <option value="orange">Orange</option>
+    <option value="brown">Brown</option>
+  </select>
+  <br>
+
+  <label for="cat_bday">Cat's birth date</label>
+  <input type="date" name="cat[birth_date]" id="cat_bday" value= "<%= @cat.birth_date %>">
+  <br>
+
+  <label>
+     Description
+     <textarea name="cat[description]"><%= @cat.description %></textarea>
+  </label>
+
+
+  <input type="submit" value="<%= submit_text %>">
+</form>
