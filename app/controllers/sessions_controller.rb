@@ -11,9 +11,10 @@ class SessionsController < ApplicationController
       params[:user][:password])
 
     if @user.nil?
+
       render :new
     else
-      login!(@user)
+      log_in!(@user)
       redirect_to cats_url
     end
   end

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
     return nil if user.nil?
 
-    user.is_password(password) ? user : nil
+    user.is_password?(password) ? user : nil
   end
 
   def password=(password)
