@@ -7,6 +7,11 @@ class CatRentalRequest < ActiveRecord::Base
   foreign_key: :cat_id,
   class_name: "Cat"
 
+  belongs_to :user,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: "User"
+
   after_initialize :assign_pending_status
 
   validates(
@@ -14,6 +19,7 @@ class CatRentalRequest < ActiveRecord::Base
     :start_date,
     :end_date,
     :status,
+    :user_id,
     presence: true
   )
 

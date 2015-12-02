@@ -30,12 +30,12 @@ class CatsController < ApplicationController
   end
 
   def edit
-    @cat = Cat.find(params[:id])
+    @cat = current_user.cats.find(params[:id])
     render :edit
   end
 
   def update
-    @cat = Cat.find(params[:id])
+    @cat = current_user.cats.find(params[:id])
     if @cat.update(cat_params)
       redirect_to cat_url(@cat)
     else
@@ -49,5 +49,12 @@ class CatsController < ApplicationController
   def cat_params
     params.require(:cat).permit(:name, :birth_date, :color, :sex, :description)
   end
+
+  # def validate_ownership(cat)
+  #   unless current_user.cats.includes(cat)
+  #     flash.now[:errors] = "You cannot edit this cat. You are not the owner"
+  #     redirect_to cats_url
+  #   end
+  # end
 
 end
