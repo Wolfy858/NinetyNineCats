@@ -7,7 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h2><%= !current_user.nil? ? current_user.username : "" %></h2>
+  <% unless current_user.nil? %>
+    <h2><%= current_user.username %></h2>
+    <%= render "shared/log_out_button" %>
+  <% else %>
+    <%= render "shared/log_in_button" %>
+    <%= render "shared/sign_up_button" %>
+  <% end %>
 
 <%= yield %>
 
