@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   validates :username, :password_digest, :session_token, presence: true
-  validates :session_token, uniqueness: true
+  validates :session_token, :username, uniqueness: true
 
   after_initialize :ensure_session_token
 

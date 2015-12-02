@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to user_url(@user)
+      log_in!(@user)
+      redirect_to user_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
@@ -17,6 +18,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    if current_user.nil?
+      redirect_to new_session_url
+    else
+      @user = current_user
+      render :show
+    end
 
   end
 
