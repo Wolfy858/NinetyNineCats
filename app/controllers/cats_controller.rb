@@ -1,6 +1,8 @@
 class CatsController < ApplicationController
 
   before_action :require_user!, only: [:new, :create, :edit, :update]
+  before_action :validate_ownership, only: [:edit, :update]
+
 
   def index
     @cats = Cat.all
@@ -50,11 +52,12 @@ class CatsController < ApplicationController
     params.require(:cat).permit(:name, :birth_date, :color, :sex, :description)
   end
 
-  # def validate_ownership(cat)
-  #   unless current_user.cats.includes(cat)
-  #     flash.now[:errors] = "You cannot edit this cat. You are not the owner"
-  #     redirect_to cats_url
-  #   end
-  # end
+  def validate_ownership
+    cat = Cat.find(params[:id])
+    unless current_user.cats.include?(cat)
+      flash.now[:errors] = "You cannot edit this cat. You are not the owner"
+      redirect_to cats_url
+    end
+  end
 
 end
