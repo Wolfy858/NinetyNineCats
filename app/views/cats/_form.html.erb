@@ -16,19 +16,29 @@
   <br>
 
   <label for="cat_sex_male">Male</label>
-  <input type="radio" name="cat[sex]" id="cat_sex_male" value="M">
+  <input type="radio"
+         name="cat[sex]"
+         id="cat_sex_male"
+         value="M"
+         <%= "checked" if @cat.sex == "M" %>>
   <br>
 
   <label for="cat_sex_female">Female</label>
-  <input type="radio" name="cat[sex]" id="cat_sex_female" value="F">
+  <input type="radio"
+         name="cat[sex]"
+         id="cat_sex_female"
+         value="F"
+         <%= "checked" if @cat.sex == "F" %>>
   <br>
 
   <label for="cat_color">Cat's coat color</label>
   <select name="cat[color]" id="cat_color">
-    <option value="black">Black</option>
-    <option value="white">White</option>
-    <option value="orange">Orange</option>
-    <option value="brown">Brown</option>
+    <% Cat::CAT_COLORS.each do |cat_color| %>
+      <option value="<%= cat_color %>"
+        <%= "selected" if @cat.color == cat_color %>>
+        <%= cat_color %>
+      </option>
+    <% end %>
   </select>
   <br>
 
