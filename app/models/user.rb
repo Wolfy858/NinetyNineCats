@@ -8,8 +8,16 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
 
-  has_many :cats
-  has_many :rental_requests
+  has_many(
+    :cats,
+    class_name: "Cat",
+    dependent: :destroy
+  )
+
+  has_many :rental_requests,
+  class_name: "CatRentalRequest",
+  dependent: :destroy
+
 
 
 
